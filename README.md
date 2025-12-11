@@ -25,6 +25,8 @@ Press `Ctrl+C` to exit.
 
 ## Screenshot
 
+![Screenshot](screenshot.png)
+
 The visualization shows a horizontal bar chart where:
 - X-axis: CPU cores (sorted by current frequency)
 - Y-axis: Frequency in MHz (0 to max supported frequency)
