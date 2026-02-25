@@ -29,6 +29,9 @@ set datafile separator whitespace
 
 # Refresh plot every 1 second
 while (1) {
+    stats '< lscpu -p=MHZ | grep -v "^#"' using 1 nooutput
+    peak = STATS_max
+    set title sprintf("CPU Core Frequencies — Peak: %.0f MHz", peak) textcolor rgb "gray"
     plot '< lscpu -p=MHZ | sort -rn' using 0:1 with boxes notitle fillcolor rgb "#6495ED"
     pause 1
 }
