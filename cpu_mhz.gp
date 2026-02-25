@@ -28,10 +28,12 @@ set xrange [-0.5:xmax+0.5]
 set datafile separator whitespace
 
 # Refresh plot every 1 second
+tmpfile = '/tmp/cpu_mhz.dat'
 while (1) {
-    stats '< lscpu -p=MHZ | grep -v "^#"' using 1 nooutput
+    system('lscpu -p=MHZ | grep -v "^#" | sort -rn > '.tmpfile)
+    stats tmpfile using 1 nooutput
     peak = STATS_max
     set title sprintf("CPU Core Frequencies — Peak: %.0f MHz", peak) textcolor rgb "gray"
-    plot '< lscpu -p=MHZ | sort -rn' using 0:1 with boxes notitle fillcolor rgb "#6495ED"
+    plot tmpfile using 0:1 with boxes notitle fillcolor rgb "#6495ED"
     pause 1
 }
